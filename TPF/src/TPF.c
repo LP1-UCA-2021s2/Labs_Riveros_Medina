@@ -503,7 +503,6 @@ void MovimientoJ(int aux,int D, int Matriz_Tab[][D]){
 								if(a==b){
 									aux35++;
 									band2++;
-
 								}
 							}
 						}
@@ -519,7 +518,6 @@ void MovimientoJ(int aux,int D, int Matriz_Tab[][D]){
 								if(a==b){
 									aux35++;
 									band2++;
-
 								}
 							}
 						}
@@ -567,7 +565,6 @@ void MovimientoJ(int aux,int D, int Matriz_Tab[][D]){
 									}
 								}
 							}
-
 						}else{
 							printf("Jugada no valida\n\n");
 						}
@@ -603,6 +600,7 @@ void MovimientoC(int aux,int D, int Matriz_Tab[][D]){
 					if(Matriz_Tab[f][p+1]==' '){
 						Matriz_Tab[f][p+1]='-';
 						band1++;
+						printf("\n*La computadora unio el %d %d con %d %d *\n\n", ((f+1)/2)+1, ((c+1)/2)+1, ((x+1)/2)+1, ((y+1)/2)+1 );
 						if(Matriz_Tab[f+1][p]=='|' && Matriz_Tab[f+1][p+2]=='|' && Matriz_Tab[f+2][p+1]=='-'){	///el encerrado arriba
 							if(Matriz_Tab[f+1][p+1]==' '){
 								Matriz_Tab[f+1][p+1]='C';
@@ -630,7 +628,6 @@ void MovimientoC(int aux,int D, int Matriz_Tab[][D]){
 							}
 						}
 					}
-
 				}
 			}else{
 				if(c==y){
@@ -639,6 +636,7 @@ void MovimientoC(int aux,int D, int Matriz_Tab[][D]){
 						if(Matriz_Tab[q+1][c]==' '){
 							Matriz_Tab[q+1][c]='|';
 							band1++;
+							printf("\n*La computadora unio el %d %d con %d %d *\n\n", ((f+1)/2)+1, ((c+1)/2)+1, ((x+1)/2)+1, ((y+1)/2)+1);
 							if(Matriz_Tab[q+1][c-2]=='|'&&Matriz_Tab[q][c-1]=='-'&&Matriz_Tab[q+2][c-1]=='-'){	///el encerrado a la dereccha
 								if(Matriz_Tab[q+1][c-1]==' '){
 									Matriz_Tab[q+1][c-1]='C';
@@ -665,7 +663,6 @@ void MovimientoC(int aux,int D, int Matriz_Tab[][D]){
 									}
 								}
 							}
-
 						}
 					}
 				}
