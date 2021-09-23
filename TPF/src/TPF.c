@@ -11,90 +11,99 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 void imprimirTablero(int aux, int D, int Matriz_Tab[][D]);
 void llenarTablero(int aux, int D, int Matriz_Tab[][D]);
 void MovimientoJ(int aux, int D, int Matriz_Tab[][D]);
 void MovimientoC(int aux, int D, int Matriz_Tab[][D]);
 int scoreJ=0,scoreC=0;
-int a, b, aux35;
-int ale;
+int aux35;
 
 int main(void) {
 	int aux1=0; int menu; int a; int b;
 	while(aux1!=1){
-		printf("Bienvenido al Juego dots and boxes\n");
-		printf("Menu\n1. Jugar\n2. Reglas\n3. Controles\n4. Creditos\n5. Salir\n");
+		printf("\n***Bienvenido al Juego dots and boxes***\n\n");
+		printf("\tMenu\n1. Jugar\n2. Reglas\n3. Controles\n4. Creditos\n5. Salir\n");
 		scanf("%d", &menu);
 		while(getchar()!='\n');
 		if(menu==2){
-			printf("En cada turno, el jugador puede conectar dos puntos adyacentes no conectados con ");
+			printf("\nEn cada turno, el jugador puede conectar dos puntos adyacentes no conectados con una única raya (vertical u horizontal). \n"
+					"Cada raya dibujada corresponde a una pared de un cuadrado, cuando uno de los jugadores logra conectar la cuarta pared de un cuadrado, \n"
+					"se dice que el jugador ha ganado dicho cuadrado y éste se vuelve del color del jugador. Cuando un jugador completa un cuadrado tras dibujar una raya, \n"
+					"sumará 10 puntos y deberá jugar de nuevo. El juego termina cuando no hay más puntos para conectar. \n"
+					"En ese caso, el vencedor será el jugador que haya logrado una mayor puntuación. Es posible que se produzcan empates\n\nPresione Enter para volver.\n");
+			char c;
+			while ((c = getchar()) != '\n' && c != EOF) { };
 		}else{
 			if(menu==3){
-				printf("Controles\nLos puntos se unen especificando el punto que desea unir, primero la ");
-
+				printf("Controles\nLos puntos se unen especificando el punto A que desea unir, ingresar por teclado primero la fila, un salto de linea y luego la columna. \n"
+						"Con el punto B, ingresar por teclado primero la fila, un salto de linea y luego la columna. \n\nPresione Enter para volver.\n");
+				char c;
+				while ((c = getchar()) != '\n' && c != EOF) { };
 			}else{
 				if(menu==5){
-					printf("Presione cualquier boton para salir\n");
+					printf("Nos vemos c:\n");
 						aux1=1;
 				}else{
 					if(menu==4){
-						printf("Los integrantes para crear este juego son\nIvan Riveros\nMiguel Medina\n");
+						printf("Los integrantes en la creacion de este codigo son\nIvan Riveros\nMiguel Medina\n\nPresione Enter para volver.\n");
+						char c;
+						while ((c = getchar()) != '\n' && c != EOF) { };
 					}else{
 						if((menu!=1)&&(menu!=2)&&(menu!=3)&&(menu!=4)&&(menu!=5)){
 							printf("Elija una opcion correcta entre el numero 1 al 5.\n");
-
 						}else{
 							if(menu==1){
 								int band;
-								printf("Empieza\n1.Jugador\n2.Computadora\n3.Random\n");
+								printf("\nElija quien empieza\n1.Jugador\n2.Computadora\n3.Random\n");
 								scanf("%d", &band);
 								while(getchar()!='\n');
 								if(band==1){
-									int aux;
-									printf("Tamanho de la matriz: ");
-									scanf("%d", &aux);
+									int ale;
+									printf("\n*Empieza el Jugador*\n");
+									printf("\nTamanho de matriz random\n1.Si\n2.No\n");
+									scanf("%d", &ale);
 									while(getchar()!='\n');
-									int D=aux*2-1;
-									int Matriz_Tab[D][D];
-									llenarTablero(aux, D, Matriz_Tab);
-									aux35=0;
-									do{
-										imprimirTablero(aux, D, Matriz_Tab);
-										MovimientoJ(aux, D, Matriz_Tab);
-										a=scoreC+scoreJ;
-										b=(aux-1)*(aux-1);
-										if(a==b){
-											aux35++;
-											break;
-										}
-										MovimientoC(aux, D, Matriz_Tab);
-										a=scoreC+scoreJ;
-										b=(aux-1)*(aux-1);
-										if(a==b){
-											aux35++;
-										}
-										printf("El puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
-									}while(aux35==0);
-									imprimirTablero(aux, D, Matriz_Tab);
-									if(scoreJ>scoreC){
-										printf("Gano el jugador con %d puntos, felicidades\n\n", scoreJ*10);
-									}else{
-										if(scoreJ==scoreC){
-											printf("Empataron, ambos con %d puntos\n\n", scoreC*10);
-										}else{
-											printf("gano la computadora con %d puntos\n\n", scoreC*10);
-										}
-									}
-									scoreJ=0,scoreC=0;
-									char c;
-									while ((c = getchar()) != '\n' && c != EOF) { };
-
-								}else{
-									if(band==2){
+									if(ale==1){
 										int aux;
-										printf("Tamanho de la matriz: ");
+										aux=rand()%12+3;
+										int D=aux*2-1;
+										int Matriz_Tab[D][D];
+										llenarTablero(aux, D, Matriz_Tab);
+										aux35=0;
+										do{
+											imprimirTablero(aux, D, Matriz_Tab);
+											MovimientoJ(aux, D, Matriz_Tab);
+											a=scoreC+scoreJ;
+											b=(aux-1)*(aux-1);
+											if(a==b){
+												aux35++;
+												break;
+											}
+											MovimientoC(aux, D, Matriz_Tab);
+											a=scoreC+scoreJ;
+											b=(aux-1)*(aux-1);
+											if(a==b){
+												aux35++;
+											}
+											printf("\nEl puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
+										}while(aux35==0);
+										imprimirTablero(aux, D, Matriz_Tab);
+										if(scoreJ>scoreC){
+											printf("\n**Gano el jugador con %d puntos, felicidades**\n\n", scoreJ*10);
+										}else{
+											if(scoreJ==scoreC){
+												printf("\n*Empataron, ambos con %d puntos*\n\n", scoreC*10);
+											}else{
+												printf("\n*Gano la computadora con %d puntos*\n\n", scoreC*10);
+											}
+										}
+										scoreJ=0,scoreC=0;
+										char c;
+										while ((c = getchar()) != '\n' && c != EOF) { };
+									}else{
+										int aux;
+										printf("\nTamanho de la matriz: ");
 										scanf("%d", &aux);
 										while(getchar()!='\n');
 										int D=aux*2-1;
@@ -102,43 +111,128 @@ int main(void) {
 										llenarTablero(aux, D, Matriz_Tab);
 										aux35=0;
 										do{
-											MovimientoC(aux, D, Matriz_Tab);
 											imprimirTablero(aux, D, Matriz_Tab);
+											MovimientoJ(aux, D, Matriz_Tab);
 											a=scoreC+scoreJ;
 											b=(aux-1)*(aux-1);
 											if(a==b){
 												aux35++;
 												break;
 											}
-											MovimientoJ(aux, D, Matriz_Tab);
+											MovimientoC(aux, D, Matriz_Tab);
 											a=scoreC+scoreJ;
 											b=(aux-1)*(aux-1);
 											if(a==b){
 												aux35++;
 											}
-											printf("El puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
+											printf("\nEl puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
 										}while(aux35==0);
 										imprimirTablero(aux, D, Matriz_Tab);
 										if(scoreJ>scoreC){
-											printf("Gano el jugador con %d puntos, felicidades\n\n", scoreJ*10);
+											printf("\n**Gano el jugador con %d puntos, felicidades**\n\n", scoreJ*10);
 										}else{
 											if(scoreJ==scoreC){
-												printf("Empataron, ambos con %d puntos\n\n", scoreC*10);
+												printf("\n*Empataron, ambos con %d puntos*\n\n", scoreC*10);
 											}else{
-												printf("gano la computadora con %d puntos\n\n", scoreC*10);
+												printf("\n*Gano la computadora con %d puntos*\n\n", scoreC*10);
 											}
 										}
 										scoreJ=0,scoreC=0;
 										char c;
 										while ((c = getchar()) != '\n' && c != EOF) { };
-
+									}
+								}else{
+									if(band==2){
+										int ale;
+										printf("\n*Empieza Computadora*\n");
+										printf("\nTamanho de matriz random\n1.Si\n2.No\n");
+										scanf("%d", &ale);
+										while(getchar()!='\n');
+										if(ale==1){
+											int aux;
+											aux=rand()%12+3;
+											int D=aux*2-1;
+											int Matriz_Tab[D][D];
+											llenarTablero(aux, D, Matriz_Tab);
+											aux35=0;
+											do{
+												MovimientoC(aux, D, Matriz_Tab);
+												imprimirTablero(aux, D, Matriz_Tab);
+												a=scoreC+scoreJ;
+												b=(aux-1)*(aux-1);
+												if(a==b){
+													aux35++;
+													break;
+												}
+												MovimientoJ(aux, D, Matriz_Tab);
+												a=scoreC+scoreJ;
+												b=(aux-1)*(aux-1);
+												if(a==b){
+													aux35++;
+												}
+												printf("\nEl puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
+											}while(aux35==0);
+											imprimirTablero(aux, D, Matriz_Tab);
+											if(scoreJ>scoreC){
+												printf("\n**Gano el jugador con %d puntos, felicidades**\n\n", scoreJ*10);
+											}else{
+												if(scoreJ==scoreC){
+													printf("\n*Empataron, ambos con %d puntos*\n\n", scoreC*10);
+												}else{
+													printf("\n*Gano la computadora con %d puntos*\n\n", scoreC*10);
+												}
+											}
+											scoreJ=0,scoreC=0;
+											char c;
+											while ((c = getchar()) != '\n' && c != EOF) { };
+										}else{
+											int aux;
+											printf("\nTamanho de la matriz: ");
+											scanf("%d", &aux);
+											while(getchar()!='\n');
+											int D=aux*2-1;
+											int Matriz_Tab[D][D];
+											llenarTablero(aux, D, Matriz_Tab);
+											aux35=0;
+											do{
+												MovimientoC(aux, D, Matriz_Tab);
+												imprimirTablero(aux, D, Matriz_Tab);
+												a=scoreC+scoreJ;
+												b=(aux-1)*(aux-1);
+												if(a==b){
+													aux35++;
+													break;
+												}
+												MovimientoJ(aux, D, Matriz_Tab);
+												a=scoreC+scoreJ;
+												b=(aux-1)*(aux-1);
+												if(a==b){
+													aux35++;
+												}
+												printf("\nEl puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
+											}while(aux35==0);
+											imprimirTablero(aux, D, Matriz_Tab);
+											if(scoreJ>scoreC){
+												printf("\n**Gano el jugador con %d puntos, felicidades**\n\n", scoreJ*10);
+											}else{
+												if(scoreJ==scoreC){
+													printf("\n*Empataron, ambos con %d puntos*\n\n", scoreC*10);
+												}else{
+													printf("\n*Gano la computadora con %d puntos*\n\n", scoreC*10);
+												}
+											}
+											scoreJ=0,scoreC=0;
+											char c;
+											while ((c = getchar()) != '\n' && c != EOF) { };
+										}
 									}else{
 										if(band==3){
 											int ranT;
 											ranT=rand()%2;
 											if(ranT==0){
-												printf("Empieza Computadora\n");
-												printf("Tamanho de matriz random\n1.Si\n2.No");
+												int ale;
+												printf("\n*Empieza Computadora*\n");
+												printf("\nTamanho de matriz random\n1.Si\n2.No\n");
 												scanf("%d", &ale);
 												while(getchar()!='\n');
 												if(ale==1){
@@ -163,16 +257,16 @@ int main(void) {
 														if(a==b){
 															aux35++;
 														}
-														printf("El puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
+														printf("\nEl puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
 													}while(aux35==0);
 													imprimirTablero(aux, D, Matriz_Tab);
 													if(scoreJ>scoreC){
-														printf("Gano el jugador con %d puntos, felicidades\n\n", scoreJ*10);
+														printf("\n**Gano el jugador con %d puntos, felicidades**\n\n", scoreJ*10);
 													}else{
 														if(scoreJ==scoreC){
-															printf("Empataron, ambos con %d puntos\n\n", scoreC*10);
+															printf("\n*Empataron, ambos con %d puntos*\n\n", scoreC*10);
 														}else{
-															printf("gano la computadora con %d puntos\n\n", scoreC*10);
+															printf("\n*Gano la computadora con %d puntos*\n\n", scoreC*10);
 														}
 													}
 													scoreJ=0,scoreC=0;
@@ -180,7 +274,7 @@ int main(void) {
 													while ((c = getchar()) != '\n' && c != EOF) { };
 												}else{
 													int aux;
-													printf("Tamanho de la matriz: ");
+													printf("\nTamanho de la matriz: ");
 													scanf("%d", &aux);
 													while(getchar()!='\n');
 													int D=aux*2-1;
@@ -202,16 +296,16 @@ int main(void) {
 														if(a==b){
 															aux35++;
 														}
-														printf("El puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
+														printf("\nEl puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
 													}while(aux35==0);
 													imprimirTablero(aux, D, Matriz_Tab);
 													if(scoreJ>scoreC){
-														printf("Gano el jugador con %d puntos, felicidades\n\n", scoreJ*10);
+														printf("\n**Gano el jugador con %d puntos, felicidades**\n\n", scoreJ*10);
 													}else{
 														if(scoreJ==scoreC){
-															printf("Empataron, ambos con %d puntos\n\n", scoreC*10);
+															printf("\n*Empataron, ambos con %d puntos*\n\n", scoreC*10);
 														}else{
-															printf("gano la computadora con %d puntos\n\n", scoreC*10);
+															printf("\n*Gano la computadora con %d puntos*\n\n", scoreC*10);
 														}
 													}
 													scoreJ=0,scoreC=0;
@@ -219,8 +313,9 @@ int main(void) {
 													while ((c = getchar()) != '\n' && c != EOF) { };
 												}
 											}else{
-												printf("Empieza Jugador\n");
-												printf("Tamanho de matriz random\n1.Si\n2.No");
+												int ale;
+												printf("\n*Empieza Jugador*\n");
+												printf("\nTamanho de matriz random\n1.Si\n2.No\n");
 												scanf("%d", &ale);
 												while(getchar()!='\n');
 												if(ale==1){
@@ -245,16 +340,16 @@ int main(void) {
 														if(a==b){
 															aux35++;
 														}
-														printf("El puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
+														printf("\nEl puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
 													}while(aux35==0);
 													imprimirTablero(aux, D, Matriz_Tab);
 													if(scoreJ>scoreC){
-														printf("Gano el jugador con %d puntos, felicidades\n\n", scoreJ*10);
+														printf("\n**Gano el jugador con %d puntos, felicidades**\n\n", scoreJ*10);
 													}else{
 														if(scoreJ==scoreC){
-															printf("Empataron, ambos con %d puntos\n\n", scoreC*10);
+															printf("\n*Empataron, ambos con %d puntos*\n\n", scoreC*10);
 														}else{
-															printf("gano la computadora con %d puntos\n\n", scoreC*10);
+															printf("\n*Gano la computadora con %d puntos*\n\n", scoreC*10);
 														}
 													}
 													scoreJ=0,scoreC=0;
@@ -262,7 +357,7 @@ int main(void) {
 													while ((c = getchar()) != '\n' && c != EOF) { };
 												}else{
 													int aux;
-													printf("Tamanho de la matriz: ");
+													printf("\nTamanho de la matriz: ");
 													scanf("%d", &aux);
 													while(getchar()!='\n');
 													int D=aux*2-1;
@@ -284,16 +379,16 @@ int main(void) {
 														if(a==b){
 															aux35++;
 														}
-														printf("El puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
+														printf("\nEl puntaje del Jugador es %d\nEl puntaje de la maquina es %d\n\n", scoreJ*10, scoreC*10);
 													}while(aux35==0);
 													imprimirTablero(aux, D, Matriz_Tab);
 													if(scoreJ>scoreC){
-														printf("Gano el jugador con %d puntos, felicidades\n\n", scoreJ*10);
+														printf("\n**Gano el jugador con %d puntos, felicidades**\n\n", scoreJ*10);
 													}else{
 														if(scoreJ==scoreC){
-															printf("Empataron, ambos con %d puntos\n\n", scoreC*10);
+															printf("\n*Empataron, ambos con %d puntos*\n\n", scoreC*10);
 														}else{
-															printf("gano la computadora con %d puntos\n\n", scoreC*10);
+															printf("\n*Gano la computadora con %d puntos*\n\n", scoreC*10);
 														}
 													}
 													scoreJ=0,scoreC=0;
@@ -355,14 +450,14 @@ void llenarTablero(int aux, int D, int Matriz_Tab[][D]){
 }
 
 void MovimientoJ(int aux,int D, int Matriz_Tab[][D]){
-	int x, y, f, c, p, q;
+	int x, y, f, c, p, q, a, b;
 	int band2=0;
 	while(band2==0){
-		printf("Seleccione la ficha que desee unir...\n");
-		printf("\tIntroduzca primero la fila luego un salto de linea y la columna\n");
+		printf("Seleccione las fichas que desee unir...\n");
+		printf("\tPunto A (Introduzca primero la fila, luego un salto de linea y la columna)\n");
 		scanf("%d %d",&f,&c);
 		while(getchar()!='\n');
-		printf("\tIntroduzca primero la fila luego un salto de linea y la columna donde desee mover\n");
+		printf("\tPunto B (Introduzca primero la fila, luego un salto de linea y la columna)\n");
 		scanf("%d %d",&x,&y);
 		while(getchar()!='\n');
 		if(f<=aux+1&&c<=aux+1&&x<=aux+1&&y<=aux+1&&f>0&&c>0&&x>0&&y>0){				///verifica q los valores esten en rango
@@ -470,7 +565,7 @@ void MovimientoJ(int aux,int D, int Matriz_Tab[][D]){
 }
 
 void MovimientoC(int aux,int D, int Matriz_Tab[][D]){
-	int x, y, f, c, p, q;
+	int x, y, f, c, p, q, a, b;
 	int band1=0;
 	while(band1==0){
 		f=rand()%aux+1;
