@@ -105,7 +105,12 @@ int main(void) {
 										int aux;
 										printf("\nTamanho de la matriz: ");
 										scanf("%d", &aux);
-										while(getchar()!='\n');
+										while(aux<3||aux>15){
+											while((getchar()!='\n'))
+											continue;
+											printf("\nTamanho de la matriz incorrecto ingrese de new: ");
+											scanf("%d", &aux);
+										}
 										int D=aux*2-1;
 										int Matriz_Tab[D][D];
 										llenarTablero(aux, D, Matriz_Tab);
@@ -189,7 +194,12 @@ int main(void) {
 											int aux;
 											printf("\nTamanho de la matriz: ");
 											scanf("%d", &aux);
-											while(getchar()!='\n');
+											while(aux<3||aux>15){
+												while((getchar()!='\n'))
+													continue;
+												printf("\nTamanho de la matriz incorrecto ingrese de new: ");
+												scanf("%d", &aux);
+											}
 											int D=aux*2-1;
 											int Matriz_Tab[D][D];
 											llenarTablero(aux, D, Matriz_Tab);
@@ -276,7 +286,12 @@ int main(void) {
 													int aux;
 													printf("\nTamanho de la matriz: ");
 													scanf("%d", &aux);
-													while(getchar()!='\n');
+													while(aux<3||aux>15){
+														while((getchar()!='\n'))
+															continue;
+														printf("\nTamanho de la matriz incorrecto ingrese de new: ");
+														scanf("%d", &aux);
+													};
 													int D=aux*2-1;
 													int Matriz_Tab[D][D];
 													llenarTablero(aux, D, Matriz_Tab);
@@ -359,7 +374,12 @@ int main(void) {
 													int aux;
 													printf("\nTamanho de la matriz: ");
 													scanf("%d", &aux);
-													while(getchar()!='\n');
+													while(aux<3||aux>15){
+														while((getchar()!='\n'))
+															continue;
+														printf("\nTamanho de la matriz incorrecto ingrese de new: ");
+														scanf("%d", &aux);
+													}
 													int D=aux*2-1;
 													int Matriz_Tab[D][D];
 													llenarTablero(aux, D, Matriz_Tab);
