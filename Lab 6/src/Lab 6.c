@@ -22,7 +22,7 @@ int esPalindromo(char* cad)
     while (*final != '\0') {
         ++final;
     }
-    final=final-2;
+    final=final-1;
 
     for (aux = cad; final >= aux;) {
         if (*final == *aux) {
@@ -51,18 +51,19 @@ void haceminusculas(char cadena[1000])
 }
 
 void sacaespaciosylimpia(char cadena[1000]){
-	int LEN=strlen(cadena)-1;
+	int lon=strlen(cadena)-1;
 	int a=0, k=0;
-	do{
-		if(cadena[a]<'a'||cadena[a]>'z'){
-			for(k=a;k<LEN;k++){
+	while(cadena[a]!='\n'){
+		if(cadena[a]==' '){
+			for(k=a;k<lon;k++){
 				cadena[k]=cadena[k+1];
 			}
-			LEN--;
+			lon--;
 		}
 		a++;
-	}while(cadena[a]!='\n');
-	cadena[LEN+1]='\0';
+	}
+	cadena[lon]='\0';
+
 }
 
 
